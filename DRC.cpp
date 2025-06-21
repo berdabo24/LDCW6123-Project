@@ -9,15 +9,26 @@ using namespace std;
 #define KEY_ENTER 13
 
 //Function definitions
+
+//Menu functions
 int main();
 void White_HL(string text);
+void DrawMenu(int input);
+void MenuSelectOption(int option);
+void MenuSelection();
+
+//Quiz funtions
 void DrawQues(int input);
+void QuizSelectOption(int option);
 void DisplayAns(string answer);
-void SelectOption(int option);
 void CreateQuestion();
 void dialogue(bool answer);
 void SetQuiz(int i);
 void border();
+int StartQuiz();
+
+//Screen Time Tracker functions
+int ScreenTimeTracker();
 
 // Declare variables
 int QUIZ_SIZE = 7, CurrentQues = 0, marks = 0, random;
@@ -30,6 +41,46 @@ void White_HL(string text){
     SetConsoleTextAttribute(hConsole, 112);
     cout << text;
     SetConsoleTextAttribute(hConsole, 15);
+}
+
+void AnyKey(){
+    cout << endl;
+    cout << endl;
+
+    cout << "Press any key to continue..." << endl;
+    getch();
+}
+
+// Draws the menu on the screen
+void DrawMenu(int input){
+    system("cls");
+
+    cout << "-==+{ Digital Responsibility Checker }+==-" << endl;
+    cout << endl;
+    cout << "Use the UP, DOWN arrow keys and ENTER key to select:" << endl;
+
+    // Highlights text based on input
+    if (input == 0){
+        cout << "1. "; White_HL("Daily Digital Time Tracker"); cout << endl;
+    }
+    else{
+        cout << "1. Daily Digital Time Tracker" << endl;
+    }
+
+    if (input == 1){
+        cout << "2. "; White_HL("Digital Sharing Quiz"); cout << endl;
+    }
+    else{
+        cout << "2. Digital Sharing Quiz" << endl;
+    }
+
+    if (input == 2){
+        cout << "3. "; White_HL("Exit"); cout << endl;
+    }
+    else{
+        cout << "3. Exit" << endl;
+    }
+
 }
 
 // Draws the question on the screen
@@ -58,9 +109,9 @@ void DrawQues(int input){
         cout << "*+ No" << endl;
     }
 
-
 }
 
+// Determines if the user chooses the right option and displays the answer
 void DisplayAns(string answer){
     cout << endl;
     border();
@@ -78,13 +129,28 @@ void DisplayAns(string answer){
         cout << endl << "The correct answer is: " << correctAnswers[CurrentQues] << endl;
         cout << reason[CurrentQues] << endl;
     }
-
-
-    
 }
 
 // Executes function based on selected option
-void SelectOption(int option){
+void MenuSelectOption(int option){
+
+    switch (option){
+        case 0:
+            ScreenTimeTracker();
+        break;
+        case 1:
+            StartQuiz();
+        break;
+        case 2:
+            system("cls");
+            cout << "Program exited" << endl;
+            exit(0);
+        break;
+    }
+}
+
+// Executes function based on selected option
+void QuizSelectOption(int option){
 
     switch (option){
         case 0:
@@ -95,7 +161,6 @@ void SelectOption(int option){
         break;
     }
 }
-
 
 // Creates the question with menu selection
 void CreateQuestion(){
@@ -120,18 +185,51 @@ void CreateQuestion(){
             }
             break;
             case KEY_ENTER:
-            SelectOption(y);
-            getch();
+            QuizSelectOption(y);
+            AnyKey();
             loop = false;
             break;
         }
     }
 }
 
+// Key inputs for selecting the menu with arrow keys
+void MenuSelection(){
+
+    int y = 0;
+    DrawMenu(y); // Draw menu once
+
+    // Range of selection 0 - 2
+
+    bool loop = true;
+    while(loop){
+        switch (getch()){
+            case KEY_UP:
+            if (y <= 2 && y > 0){
+                y--;
+                DrawMenu(y);
+            }
+            break; 
+            case KEY_DOWN:
+            if (y < 2 && y >= 0){
+                y++;
+                DrawMenu(y);
+            }
+            break;
+            case KEY_ENTER:
+            MenuSelectOption(y);
+            loop = false;
+            break;
+        }
+    }
+}
+
+// Border for decoration
 void border() {
     cout << "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" << endl;
 }
 
+//Displays a dialogue when user answers the quiz
 void dialogue(bool answer) {
     random = rand() % 5;
     if (answer) {
@@ -168,6 +266,48 @@ void dialogue(bool answer) {
         }
     }
     cout << commentText << endl;
+}
+
+int ScreenTimeTracker(){
+    system("cls");
+
+    float StudyHour, EntHour, SocialHour; // Study hours, Entertainment hours, Social Media hours
+    cout << "--==++{ Daily digital time tracker }++==-- \n\n";
+    
+    cout << "How many hours have you studied for? \n";
+    cout << "Hour(s) studying: "; cin >> StudyHour; cout << "\n";
+    
+    cout << "How many hours have you spent on entertainment? \n";
+    cout << "Hour(s) spent on entertainment: "; cin >> EntHour; cout << "\n";
+    
+    cout << "How many hours have you spent on social media? \n";
+    cout << "Hour(s) spent on social media: "; cin >> SocialHour; cout << "\n";
+    
+    float TotalScreenTime = StudyHour + EntHour + SocialHour;
+    
+    cout << "Total screen time: " << TotalScreenTime << " hours" << endl;
+    
+    if (TotalScreenTime > 10){
+        cout << "High screen time! Consider reducing your digital use." << endl;
+    }
+    else{
+        cout << "Your screen time is healthy." << endl;
+    }
+    
+    cout << "\n";
+    
+    if (StudyHour >= EntHour && StudyHour >= SocialHour){
+        cout << "Good balance: You have productive screen time" << endl;
+    }
+    else if (SocialHour >= StudyHour || SocialHour >= EntHour){
+        cout << "Warning: You are spending too much time on social media! This may lead to an addiction." << endl;
+    }
+    else if (EntHour >= StudyHour || EntHour >= SocialHour){
+        cout << "Consider balancing entertainment with more productive tasks!" << endl;
+    }
+
+    AnyKey();
+    return 0;
 }
 
 // Function to display the quiz questions
@@ -214,7 +354,7 @@ void SetQuiz(int i) {
     CreateQuestion();
 }
 
-int main() {
+int StartQuiz() {
 
     // Main quiz loop
     for (int i = 0; i <= 6; i++){
@@ -232,6 +372,17 @@ int main() {
     cout << "*+ WOOOOO!!! You have completed the quiz! +*" << endl << endl;
     cout << "Your total marks: " << marks << "/6 !" << endl << endl;
     cout << "Thank you for taking this quiz! Let's make the Internet a safe space for everyone! BD" << endl;
+
+    AnyKey();
+    return 0;
+}
+
+int main(){
+
+    while(true){
+        MenuSelection();
+    }
+
 
     return 0;
 }
