@@ -18,6 +18,7 @@ void MenuSelectOption(int option);
 void MenuSelection();
 
 //Quiz funtions
+void startPage();
 void DrawQues(int input);
 void QuizSelectOption(int option);
 void DisplayAns(string answer);
@@ -81,6 +82,31 @@ void DrawMenu(int input){
         cout << "3. Exit" << endl;
     }
 
+}
+
+// Function for start page
+void startPage() {
+    system("cls");
+    cout << "\t\t*+ Welcome to the +*" << endl;
+    cout << "    _____ _____ _____ _____ _______       _\n";
+    cout << "   |  __ \\_   _/ ____|_   _|__   __|/\\   | |\n";
+    cout << "   | |  | || || |  __  | |    | |  /  \\  | |\n";
+    cout << "   | |  | || || | |_ | | |    | | / /\\ \\ | |\n";
+    cout << "   | |__| || || |__| |_| |_   | |/ ____ \\| |____\n";
+    cout << "  _|_____/_____\\_____|_____|__|_/_/____\\_\\______|_\n";
+    cout << " / ____| |  | |   /\\   |  __ \\|_   _| \\ | |/ ____|\n";
+    cout << "| (___ | |__| |  /  \\  | |__) | | | |  \\| | |  __ \n";
+    cout << " \\___ \\|  __  | / /\\ \\ |  _  /  | | | . ` | | |_ |\n";
+    cout << " ____) | |  | |/ ____ \\| | \\ \\ _| |_| |\\  | |__| |\n";
+    cout << "|_____/|_|  |_/_/___ \\_\\_|_ \\_\\_____|_| \\_|\\_____|\n";
+    cout << "            / __ \\| |  | |_   _|___  /\n";
+    cout << "           | |  | | |  | | | |    / /\n";
+    cout << "           | |  | | |  | | | |   / /\n";
+    cout << "           | |__| | |__| |_| |_ / /__\n";
+    cout << "            \\___\\_\\\\____/|_____/_____|  \n";
+    cout << endl << endl;
+    cout << "*+ Press any key to start the quiz! +*" << endl;
+    getch();
 }
 
 // Draws the question on the screen
@@ -355,6 +381,9 @@ void SetQuiz(int i) {
 }
 
 int StartQuiz() {
+
+    // Display quiz start page
+    startPage();
 
     // Main quiz loop
     for (int i = 0; i <= 6; i++){
