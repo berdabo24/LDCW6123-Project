@@ -368,17 +368,25 @@ int ScreenTimeTracker(){
     ErrorCheck(StudyHour, "Hour(s) spent on study: "); 
 
     cout << endl;
+    border();
+    cout << endl;
+    
     
     cout << "How many hours do you spend on digital entertainment in a day? \n";
     
     ErrorCheck(EntHour, "Hour(s) spent on entertainment: "); 
 
     cout << endl;
+    border();
+    cout << endl;
+    
 
     cout << "How many hours do you spend on social media in a day? \n";
 
     ErrorCheck(SocialHour, "Hour(s) spent on social media: "); 
 
+    cout << endl;
+    border();
     cout << endl;
     
     float TotalScreenTime = StudyHour + EntHour + SocialHour;
