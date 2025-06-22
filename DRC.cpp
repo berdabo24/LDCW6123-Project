@@ -18,7 +18,7 @@ void MenuSelectOption(int option);
 void MenuSelection();
 
 //Quiz funtions
-void startPage();
+void startQuiz();
 void DrawQues(int input);
 void QuizSelectOption(int option);
 void DisplayAns(string answer);
@@ -56,7 +56,29 @@ void AnyKey(){
 void DrawMenu(int input){
     system("cls");
 
-    cout << "-==+{ Digital Responsibility Checker }+==-" << endl;
+    cout << "+======================================================================================================================+" << endl;
+    cout << "|                               ______   ___   _______  ___   _______  _______  ___                                    |" << endl;
+    cout << "|                              |      | |   | |       ||   | |       ||   _   ||   |                                   |" << endl;
+    cout << "|                              |  _    ||   | |    ___||   | |_     _||  |_|  ||   |                                   |" << endl;
+    cout << "|                              | | |   ||   | |   | __ |   |   |   |  |       ||   |                                   |" << endl;
+    cout << "|                              | |_|   ||   | |   ||  ||   |   |   |  |       ||   |___                                |" << endl;
+    cout << "|                              |       ||   | |   |_| ||   |   |   |  |   _   ||       |                               |" << endl;
+    cout << "|                              |______| |___| |_______||___|   |___|  |__| |__||_______|                               |" << endl;
+    cout << "| ______    _______  _______  _______  _______  __    _  _______  ___   _______  ___   ___      ___   _______  __   __ |" << endl;
+    cout << "||    _ |  |       ||       ||       ||       ||  |  | ||       ||   | |  _    ||   | |   |    |   | |       ||  | |  ||" << endl;
+    cout << "||   | ||  |    ___||  _____||    _  ||   _   ||   |_| ||  _____||   | | |_|   ||   | |   |    |   | |_     _||  |_|  ||" << endl;
+    cout << "||   |_||_ |   |___ | |_____ |   |_| ||  | |  ||       || |_____ |   | |       ||   | |   |    |   |   |   |  |       ||" << endl;
+    cout << "||    __  ||    ___||_____  ||    ___||  |_|  ||  _    ||_____  ||   | |  _   | |   | |   |___ |   |   |   |  |_     _||" << endl;
+    cout << "||   |  | ||   |___  _____| ||   |    |       || | |   | _____| ||   | | |_|   ||   | |       ||   |   |   |    |   |  |" << endl;
+    cout << "||___|  |_||_______||_______||___|    |_______||_|  |__||_______||___| |_______||___| |_______||___|   |___|    |___|  |" << endl;
+    cout << "|                             _______  __   __  _______  _______  ___   _  _______  ______                             |" << endl;
+    cout << "|                            |       ||  | |  ||       ||       ||   | | ||       ||    _ |                            |" << endl;
+    cout << "|                            |       ||  |_|  ||    ___||       ||   |_| ||    ___||   | ||                            |" << endl;
+    cout << "|                            |       ||       ||   |___ |       ||      _||   |___ |   |_||_                           |" << endl;
+    cout << "|                            |      _||       ||    ___||      _||     |_ |    ___||    __  |                          |" << endl;
+    cout << "|                            |     |_ |   _   ||   |___ |     |_ |    _  ||   |___ |   |  | |                          |" << endl;
+    cout << "|                            |_______||__| |__||_______||_______||___| |_||_______||___|  |_|                          |" << endl;
+    cout << "+======================================================================================================================+" << endl;
     cout << endl;
     cout << "Use the UP, DOWN arrow keys and ENTER key to select:" << endl;
 
@@ -84,8 +106,8 @@ void DrawMenu(int input){
 
 }
 
-// Function for start page
-void startPage() {
+// Function for quiz start page
+void startQuiz() {
     system("cls");
     cout << "\t\t*+ Welcome to the +*" << endl;
     cout << "    _____ _____ _____ _____ _______       _\n";
@@ -383,7 +405,7 @@ void SetQuiz(int i) {
 int StartQuiz() {
 
     // Display quiz start page
-    startPage();
+    startQuiz();
 
     // Main quiz loop
     for (int i = 0; i <= 6; i++){
@@ -399,7 +421,7 @@ int StartQuiz() {
     cout << " / __/ _/ // /|  // / ___/ / __  /_/  \n";
     cout << "/_/   /___/_/ |_/___//____/_/ /_(_)   " << endl << endl;
     cout << "*+ WOOOOO!!! You have completed the quiz! +*" << endl << endl;
-    cout << "Your total marks: " << marks << "/6 !" << endl << endl;
+    cout << "Your total marks: " << marks << "/7 !" << endl << endl;
     cout << "Thank you for taking this quiz! Let's make the Internet a safe space for everyone! BD" << endl;
 
     AnyKey();
