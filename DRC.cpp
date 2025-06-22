@@ -363,13 +363,13 @@ int ScreenTimeTracker(){
 
     float StudyHour, EntHour, SocialHour; // Study hours, Entertainment hours, Social Media hours
     
-    cout << "How many hours do you study in a day? \n";
+    cout << "How many hours do you spend on digital studying in a day? \n";
     
     ErrorCheck(StudyHour, "Hour(s) spent on study: "); 
 
     cout << endl;
     
-    cout << "How many hours do you spend on entertainment in a day? \n";
+    cout << "How many hours do you spend on digital entertainment in a day? \n";
     
     ErrorCheck(EntHour, "Hour(s) spent on entertainment: "); 
 
@@ -385,7 +385,7 @@ int ScreenTimeTracker(){
     
     cout << "Total screen time: " << TotalScreenTime << " hours" << endl;
     
-    if (TotalScreenTime > 10){
+    if (TotalScreenTime > 3){
         cout << "High screen time! Consider reducing your digital use." << endl;
     }
     else{
@@ -397,10 +397,10 @@ int ScreenTimeTracker(){
     if (StudyHour >= EntHour && StudyHour >= SocialHour){
         cout << "Good balance: You have productive screen time" << endl;
     }
-    else if (SocialHour >= StudyHour || SocialHour >= EntHour){
+    else if (SocialHour > StudyHour || SocialHour > EntHour){
         cout << "Warning: You are spending too much time on social media! This may lead to an addiction." << endl;
     }
-    else if (EntHour >= StudyHour || EntHour >= SocialHour){
+    else if (EntHour > StudyHour || EntHour > SocialHour){
         cout << "Consider balancing entertainment with more productive tasks!" << endl;
     }
 
