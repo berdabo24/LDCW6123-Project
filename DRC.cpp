@@ -1,6 +1,7 @@
 #include <iostream>
 #include <windows.h> // Highlight function
 #include <conio.h> // getch() function (for key input)
+#include <limits> // For numeric_limits
 
 using namespace std;
 
@@ -16,6 +17,10 @@ void White_HL(string text);
 void DrawMenu(int input);
 void MenuSelectOption(int option);
 void MenuSelection();
+
+//Tracker functions
+void startTracker();
+void ErrorCheck(float &input, string prompt);
 
 //Quiz funtions
 void startQuiz();
@@ -316,20 +321,65 @@ void dialogue(bool answer) {
     cout << commentText << endl;
 }
 
+// Function for quiz start page
+void startTracker() {
+    system("cls");
+    cout << "\t\t\t*+ Welcome to the +*" << endl;
+    cout << " _____          _____ _  __     __  _____ _____ _____ _____ _______       _      \n";
+    cout << "|  __ \\   /\\   |_   _| | \\ \\   / / |  __ \\_   _/ ____|_   _|__   __|/\\   | |     \n";
+    cout << "| |  | | /  \\    | | | |  \\ \\_/ /  | |  | || || |  __  | |    | |  /  \\  | |     \n";
+    cout << "| |  | |/ /\\ \\   | | | |   \\   /   | |  | || || | |_ | | |    | | / /\\ \\ | |     \n";
+    cout << "| |__| / ____ \\ _| |_| |____| |    | |__| || || |__| |_| |_   | |/ ____ \\| |____ \n";
+    cout << "|_____/_/____\\_\\_____|______|_|____|_____/_____\\_____|_____|_ |_/_/____\\_\\______|\n";
+    cout << "|__   __|_   _|  \\/  |  ____| |__   __|  __ \\     /\\   / ____| |/ /  ____|  __ \\ \n";
+    cout << "   | |    | | | \\  / | |__       | |  | |__) |   /  \\ | |    | ' /| |__  | |__) |\n";
+    cout << "   | |    | | | |\\/| |  __|      | |  |  _  /   / /\\ \\| |    |  < |  __| |  _  / \n";
+    cout << "   | |   _| |_| |  | | |____     | |  | | \\ \\  / ____ \\ |____| . \\| |____| | \\ \\ \n";
+    cout << "   |_|  |_____|_|  |_|______|    |_|  |_|  \\_\\/_/    \\_\\_____|_|\\_\\______|_|  \\_\\\n";
+    cout << endl << endl;
+    cout << "*+ Press any key to start! +*" << endl;
+    getch();
+}
+
+// Function to check for valid input
+void ErrorCheck(float &input, string prompt) { 
+    do{
+        cout << prompt; // Prompt user for input
+        cin >> input; // Get user input
+        if (cin.fail() || input < 0 || input > 24) { // Check if input is valid
+            cout << "Invalid input! Please enter a positive number between 0 and 24." << endl;
+            cout << endl;
+            cin.clear(); // Clear the error flag
+            cin.ignore(numeric_limits<streamsize>::max(), '\n'); // Ignore the invalid input
+            input = -1; // Set to -1 to ensure the loop continues
+        }
+    } while (input < 0 || input > 24); // Ensure positive number
+}
+
+
 int ScreenTimeTracker(){
+    startTracker();
     system("cls");
 
     float StudyHour, EntHour, SocialHour; // Study hours, Entertainment hours, Social Media hours
-    cout << "--==++{ Daily digital time tracker }++==-- \n\n";
     
-    cout << "How many hours have you studied for? \n";
-    cout << "Hour(s) studying: "; cin >> StudyHour; cout << "\n";
+    cout << "How many hours do you study in a day? \n";
     
-    cout << "How many hours have you spent on entertainment? \n";
-    cout << "Hour(s) spent on entertainment: "; cin >> EntHour; cout << "\n";
+    ErrorCheck(StudyHour, "Hour(s) spent on study: "); 
+
+    cout << endl;
     
-    cout << "How many hours have you spent on social media? \n";
-    cout << "Hour(s) spent on social media: "; cin >> SocialHour; cout << "\n";
+    cout << "How many hours do you spend on entertainment in a day? \n";
+    
+    ErrorCheck(EntHour, "Hour(s) spent on entertainment: "); 
+
+    cout << endl;
+
+    cout << "How many hours do you spend on social media in a day? \n";
+
+    ErrorCheck(SocialHour, "Hour(s) spent on social media: "); 
+
+    cout << endl;
     
     float TotalScreenTime = StudyHour + EntHour + SocialHour;
     
