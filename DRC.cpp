@@ -18,10 +18,6 @@ void DrawMenu(int input);
 void MenuSelectOption(int option);
 void MenuSelection();
 
-//Tracker functions
-void startTracker();
-void ErrorCheck(float &input, string prompt);
-
 //Quiz funtions
 void startQuiz();
 void DrawQues(int input);
@@ -34,7 +30,11 @@ void border();
 int StartQuiz();
 
 //Screen Time Tracker functions
+void startTracker();
+void ErrorCheck(float &input, string prompt);
 int ScreenTimeTracker();
+
+//---------------------------------------------------MENU FUNCTIONS---------------------------------------------------//
 
 // Declare variables
 int QUIZ_SIZE = 7, CurrentQues = 0, marks = 0, random;
@@ -89,24 +89,24 @@ void DrawMenu(int input){
 
     // Highlights text based on input
     if (input == 0){
-        cout << "1. "; White_HL("Daily Digital Time Tracker"); cout << endl;
+        cout << "-> "; White_HL("{Daily Digital Time Tracker}"); cout << endl;
     }
     else{
-        cout << "1. Daily Digital Time Tracker" << endl;
+        cout << "    Daily Digital Time Tracker" << endl;
     }
 
     if (input == 1){
-        cout << "2. "; White_HL("Digital Sharing Quiz"); cout << endl;
+        cout << "-> "; White_HL("{Digital Sharing Quiz}"); cout << endl;
     }
     else{
-        cout << "2. Digital Sharing Quiz" << endl;
+        cout << "    Digital Sharing Quiz" << endl;
     }
 
     if (input == 2){
-        cout << "3. "; White_HL("Exit"); cout << endl;
+        cout << "-> "; White_HL("{Exit}"); cout << endl;
     }
     else{
-        cout << "3. Exit" << endl;
+        cout << "    Exit" << endl;
     }
 
 }
@@ -149,17 +149,17 @@ void DrawQues(int input){
 
     // Highlights text based on input
     if (input == 0){
-        cout << "*+ "; White_HL("Yes"); cout << endl;
+        cout << "-> "; White_HL("{Yes}"); cout << endl;
     }
     else{
-        cout << "*+ Yes" << endl;
+        cout << "    Yes" << endl;
     }
 
     if (input == 1){
-        cout << "*+ "; White_HL("No"); cout << endl;
+        cout << "-> "; White_HL("{No}"); cout << endl;
     }
     else{
-        cout << "*+ No" << endl;
+        cout << "    No" << endl;
     }
 
 }
@@ -321,6 +321,77 @@ void dialogue(bool answer) {
     cout << commentText << endl;
 }
 
+// Function to display the quiz questions
+void SetQuiz(int i) {
+
+    CurrentQues = i;
+
+    if (i == 0) {
+        question[i] = "1. Should personal details like full names, addresses, or contact info be shared online publicly?";
+        correctAnswers[i] = "No";
+        reason[i] = "Sharing such information can put individuals at risk of identity theft, cyberstalking, or other safety concerns.";
+    }
+    else if (i == 1) {
+        question[i] = "2. Is it okay to share someone else's photo on social media without their permission?";
+        correctAnswers[i] = "No";
+        reason[i] = "Sharing someone's image without consent is a violation of their privacy and can be considered unethical, even if it was taken in a public place.";
+    }
+    else if (i == 2) {
+        question[i] = "3. Is it appropriate to use someone else's work in your presentation without giving credit?";
+        correctAnswers[i] = "No";
+        reason[i] = "This is plagiarism. Proper attribution respects intellectual property and promotes academic and ethical integrity.";
+    }
+    else if (i == 3) {
+        question[i] = "4. Is it ethical to download copyrighted music or movies from unofficial websites?";
+        correctAnswers[i] = "No";
+        reason[i] = "It's a form of digital piracy, which infringes on creators' intellectual property rights and is illegal in many countries.";
+    }
+    else if (i == 4) {
+        question[i] = "5. Should you check the credibility of a news source before reposting an article?";
+        correctAnswers[i] = "Yes";
+        reason[i] = "Verifying sources helps prevent the spread of misinformation, which is a major ethical responsibility in digital spaces.";
+    }
+    else if (i == 5) {
+        question[i] = "6. Is it ethical to share viral content if it contains misinformation or unverified facts?";
+        correctAnswers[i] = "No";
+        reason[i] = "Spreading unverified content contributes to digital misinformation and can have real-world consequences, especially in crisis situations.";
+    }
+    else if (i == 6) {
+        question[i] = "7. Can sharing fake profiles or impersonations online lead to legal consequences?";
+        correctAnswers[i] = "Yes";
+        reason[i] = "Impersonating someone or spreading fake identities can result in legal action under fraud, harassment, or cybercrime laws.";
+    }
+
+    CreateQuestion();
+}
+
+int StartQuiz() {
+
+    // Display quiz start page
+    startQuiz();
+
+    // Main quiz loop
+    marks = 0; // Reset marks
+    for (int i = 0; i <= 6; i++){
+        SetQuiz(i);
+    }
+
+   
+    // Set calculations and final statements here
+    system("cls");
+    cout << "    ___________   ___________ __  ____\n";
+    cout << "   / ____/  _/ | / /  _/ ___// / / / /\n";
+    cout << "  / /_   / //  |/ // / \\__ \\/ /_/ / / \n";
+    cout << " / __/ _/ // /|  // / ___/ / __  /_/  \n";
+    cout << "/_/   /___/_/ |_/___//____/_/ /_(_)   " << endl << endl;
+    cout << "*+ WOOOOO!!! You have completed the quiz! +*" << endl << endl;
+    cout << "Your total marks: " << marks << "/7 !" << endl << endl;
+    cout << "Thank you for taking this quiz! Let's make the Internet a safe space for everyone! BD" << endl;
+
+    AnyKey();
+    return 0;
+}
+
 // Function for quiz start page
 void startTracker() {
     system("cls");
@@ -416,75 +487,7 @@ int ScreenTimeTracker(){
     return 0;
 }
 
-// Function to display the quiz questions
-void SetQuiz(int i) {
 
-    CurrentQues = i;
-
-    if (i == 0) {
-        question[i] = "1. Should personal details like full names, addresses, or contact info be shared online publicly?";
-        correctAnswers[i] = "No";
-        reason[i] = "Sharing such information can put individuals at risk of identity theft, cyberstalking, or other safety concerns.";
-    }
-    else if (i == 1) {
-        question[i] = "2. Is it okay to share someone else's photo on social media without their permission?";
-        correctAnswers[i] = "No";
-        reason[i] = "Sharing someone's image without consent is a violation of their privacy and can be considered unethical, even if it was taken in a public place.";
-    }
-    else if (i == 2) {
-        question[i] = "3. Is it appropriate to use someone else's work in your presentation without giving credit?";
-        correctAnswers[i] = "No";
-        reason[i] = "This is plagiarism. Proper attribution respects intellectual property and promotes academic and ethical integrity.";
-    }
-    else if (i == 3) {
-        question[i] = "4. Is it ethical to download copyrighted music or movies from unofficial websites?";
-        correctAnswers[i] = "No";
-        reason[i] = "It's a form of digital piracy, which infringes on creators' intellectual property rights and is illegal in many countries.";
-    }
-    else if (i == 4) {
-        question[i] = "5. Should you check the credibility of a news source before reposting an article?";
-        correctAnswers[i] = "Yes";
-        reason[i] = "Verifying sources helps prevent the spread of misinformation, which is a major ethical responsibility in digital spaces.";
-    }
-    else if (i == 5) {
-        question[i] = "6. Is it ethical to share viral content if it contains misinformation or unverified facts?";
-        correctAnswers[i] = "No";
-        reason[i] = "Spreading unverified content contributes to digital misinformation and can have real-world consequences, especially in crisis situations.";
-    }
-    else if (i == 6) {
-        question[i] = "7. Can sharing fake profiles or impersonations online lead to legal consequences?";
-        correctAnswers[i] = "Yes";
-        reason[i] = "Impersonating someone or spreading fake identities can result in legal action under fraud, harassment, or cybercrime laws.";
-    }
-
-    CreateQuestion();
-}
-
-int StartQuiz() {
-
-    // Display quiz start page
-    startQuiz();
-
-    // Main quiz loop
-    for (int i = 0; i <= 6; i++){
-        SetQuiz(i);
-    }
-
-   
-    // Set calculations and final statements here
-    system("cls");
-    cout << "    ___________   ___________ __  ____\n";
-    cout << "   / ____/  _/ | / /  _/ ___// / / / /\n";
-    cout << "  / /_   / //  |/ // / \\__ \\/ /_/ / / \n";
-    cout << " / __/ _/ // /|  // / ___/ / __  /_/  \n";
-    cout << "/_/   /___/_/ |_/___//____/_/ /_(_)   " << endl << endl;
-    cout << "*+ WOOOOO!!! You have completed the quiz! +*" << endl << endl;
-    cout << "Your total marks: " << marks << "/7 !" << endl << endl;
-    cout << "Thank you for taking this quiz! Let's make the Internet a safe space for everyone! BD" << endl;
-
-    AnyKey();
-    return 0;
-}
 
 int main(){
 
